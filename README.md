@@ -1,2 +1,2 @@
 # APKSignReader
-A tool to read Signature on installed APKs
+A tool to read Signature on installed APKs. By providing the target package name the app will read its signatures and save to `/sdcard/Android/data/com.kuro.signreader/files/<package_name>_signatures.txt`

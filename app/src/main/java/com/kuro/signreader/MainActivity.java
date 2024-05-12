@@ -85,16 +85,20 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 try {
-                    String path = appPkg.getText().toString() + "_signatures.txt";
+                    String filename = appPkg.getText().toString() + "_signatures.txt";
+                    File outputFile = new File(getExternalFilesDir(null), filename);
+                    FileOutputStream fos = new FileOutputStream(outputFile);
+
                     StringBuilder sb = new StringBuilder();
-                    sb.append(resultBase64.getText().toString() + "\n");
-                    sb.append(resultCpp.getText().toString() + "\n");
-                    FileOutputStream fos = new FileOutputStream(new File("/sdcard", path));
+                    sb.append(resultBase64.getText().toString()).append("\n");
+                    sb.append(resultCpp.getText().toString()).append("\n");
+
                     fos.write(sb.toString().getBytes());
                     fos.close();
-                    Toast.makeText(MainActivity.this, "Saved to " + path, Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(MainActivity.this, "Saved to " + outputFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Failed to save: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
